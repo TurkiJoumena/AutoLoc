@@ -1,5 +1,6 @@
 package tn.esprit.tpautoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +24,18 @@ public class Reservation {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private StatutVehicule statut;
+
+    @ManyToOne
+    @JsonBackReference("client-Reservation")
+    private client client;
+
+    @OneToOne(mappedBy ="reservation")
+    private Contrat contrat;
+
+
+    @ManyToOne
+    @JsonBackReference("Reservation-Vehicule")
+    private Vehicule vehicule;
+
 
 }
